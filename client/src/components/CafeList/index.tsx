@@ -7,7 +7,7 @@ import type { Cafe } from '@/types';
 import { useEffect, useRef } from 'react';
 
 interface InfiniteCafeResponse {
-  items: Cafe[];
+  data: Cafe[];
   nextPage: number | null;
 }
 
@@ -43,7 +43,7 @@ export default function CafeList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const pages = (data?.pages ?? []) as InfiniteCafeResponse[];
-  const isEmpty = !pages.some((page) => page.items.length > 0);
+  const isEmpty = !pages.some((page) => page.data.length > 0);
 
   if (status === 'error') {
     return <ErrorMessage message="카페 목록을 불러오는데 실패했습니다." />;
@@ -57,16 +57,16 @@ export default function CafeList() {
         </div>
       ) : (
         pages.map((page) =>
-          page.items.map((cafe) => <CafeCard key={cafe.id} cafe={cafe} />)
+          page.data.map((cafe) => <CafeCard key={cafe.id} cafe={cafe} />)
         )
       )}
 
       <div ref={loadMoreRef} className="col-span-full flex justify-center p-4">
         {isFetchingNextPage ? (
           <LoadingSpinner />
-        ) : hasNextPage ? (
-          <div className="h-8"></div>
-        ) : null}
+        ) : (
+          hasNextPage && <div className="h-8"></div>
+        )}
       </div>
     </div>
   );

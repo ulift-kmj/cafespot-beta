@@ -3,22 +3,22 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  Carousel as ShadCarousel,
+  Carousel,
 } from '@/components/ui/carousel';
 
 interface CarouselProps {
-  photos: string[];
+  photos: { url: string }[];
 }
 
-const Carousel = ({ photos }: CarouselProps) => {
+const CafeImageCarousel = ({ photos }: CarouselProps) => {
   return (
-    <ShadCarousel className="w-full h-[50vh] rounded-xl overflow-hidden">
+    <Carousel className="w-full h-[50vh] rounded-xl overflow-hidden">
       <CarouselContent>
         {photos.map((photo, index) => (
           <CarouselItem key={index} className="h-[50vh]">
             <img
               alt={`Cafe photo ${index + 1}`}
-              src={photo}
+              src={photo.url}
               className="object-cover w-full h-full rounded-xl"
             />
           </CarouselItem>
@@ -26,8 +26,8 @@ const Carousel = ({ photos }: CarouselProps) => {
       </CarouselContent>
       <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 absolute z-10 text-white text-3xl bg-black/30 hover:bg-black/60" />
       <CarouselNext className="right-4 top-1/2 -translate-y-1/2 absolute z-10 text-white text-3xl bg-black/30 hover:bg-black/60" />
-    </ShadCarousel>
+    </Carousel>
   );
 };
 
-export default Carousel;
+export default CafeImageCarousel;

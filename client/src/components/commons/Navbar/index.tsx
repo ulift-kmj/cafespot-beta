@@ -9,21 +9,13 @@ import { FavoriteSidebar } from './FavoriteSidebar';
 import { FilterModal } from './FilterModal';
 import { SearchBar } from './SearchBar';
 
-interface NavbarProps {
-  isDetailPage: boolean;
-}
-
-const Navbar = ({ isDetailPage }: NavbarProps) => {
+const Navbar = () => {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const { searchQuery, selectedSummary, resetFilters } = useSearchFilterStore();
 
   return (
     <NavbarContainer>
-      <header
-        className={`flex items-center justify-between py-4 px-6 ${
-          isDetailPage ? 'max-w-screen-xl mx-auto' : ''
-        }`}
-      >
+      <header className="flex items-center justify-between py-4 px-6">
         <Link to="/" className="flex items-center gap-2" onClick={resetFilters}>
           <img
             src="/logo.png"

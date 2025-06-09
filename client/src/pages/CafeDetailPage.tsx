@@ -3,7 +3,7 @@ import CafeFacilities from '@/components/CafeDetail/CafeFacilities';
 import CafeHeader from '@/components/CafeDetail/CafeHeader';
 import CafeLocation from '@/components/CafeDetail/CafeLocation';
 import CafeSummary from '@/components/CafeDetail/CafeSummary';
-import Carousel from '@/components/CafeDetail/Carousel';
+import CafeImageCarousel from '@/components/CafeDetail/CafeImageCarousel';
 import Container from '@/components/commons/Container';
 import { summaryLabels } from '@/constants';
 import { useCafeDetail } from '@/hooks/useCafe';
@@ -20,7 +20,7 @@ function CafeDetailPage() {
       <div className="max-w-screen-xl mx-auto text-secondary">
         <div className="flex flex-col gap-6">
           <CafeHeader id={cafe.id} name={cafe.name} address={cafe.address} />
-          <Carousel photos={cafe.photos} />
+          <CafeImageCarousel photos={cafe.photos} />
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 mt-6">
             <div className="flex flex-col gap-4">
               <CafeSummary

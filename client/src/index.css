@@ -40,7 +40,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-warning: #f5dab3;
-  --color-darkbrown: #58473b;
+  --color-darkBrown: #58473b;
 
   --shadow-custom: 0 4px 60px rgba(4, 6, 15, 0.05);
 }

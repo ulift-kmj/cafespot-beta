@@ -6,7 +6,7 @@ import { createBrowserRouter } from 'react-router';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout isDetailPage={false} />,
+    element: <Layout />,
     children: [
       {
         index: true,

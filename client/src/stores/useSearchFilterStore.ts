@@ -1,16 +1,16 @@
 import { create } from 'zustand';
 
 interface SearchFilterState {
-  searchQuery: string;
-  selectedSummary: string | null;
+  searchQuery?: string;
+  selectedSummary?: string;
   setSearchQuery: (query: string) => void;
-  setSelectedSummary: (summary: string | null) => void;
+  setSelectedSummary: (summary: string) => void;
   resetFilters: () => void;
 }
 
 export const useSearchFilterStore = create<SearchFilterState>((set) => ({
   searchQuery: '',
-  selectedSummary: null,
+  selectedSummary: '',
   setSearchQuery: (query) => {
     set({ searchQuery: query });
     // Update URL with query parameter
@@ -34,7 +34,7 @@ export const useSearchFilterStore = create<SearchFilterState>((set) => ({
     window.history.replaceState(null, '', `/?${urlParams.toString()}`);
   },
   resetFilters: () => {
-    set({ searchQuery: '', selectedSummary: null });
+    set({ searchQuery: '', selectedSummary: '' });
     // Clear URL parameters
     window.history.replaceState(null, '', '/');
   },

@@ -7,16 +7,15 @@ import {
 } from '@tanstack/react-query';
 
 const CAFE_KEYS = {
-  all: ['cafes'] as const,
-  list: (query: string | null, summary: string | null) =>
-    [...CAFE_KEYS.all, 'list', query, summary] as const,
-  detail: (id: string) => [...CAFE_KEYS.all, 'detail', id] as const,
+  list: (query?: string, summary?: string) =>
+    ['cafeList', query, summary] as const,
+  detail: (id: string) => ['cafeDetail', id] as const,
 };
 
 export function useCafeList(
   pageSize: number = 10,
-  query: string | null = null,
-  summary: string | null = null
+  query?: string,
+  summary?: string
 ) {
   return useSuspenseInfiniteQuery({
     queryKey: CAFE_KEYS.list(query, summary),
@@ -45,7 +44,7 @@ export function useCafeCreate() {
   return useMutation({
     mutationFn: cafeApi.createCafe,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list(null, null) });
+      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list() });
     },
   });
 }
@@ -55,7 +54,7 @@ export function useCafeUpdate() {
   return useMutation({
     mutationFn: cafeApi.updateCafe,
     onSuccess: (updatedCafe) => {
-      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list(null, null) });
+      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list() });
       queryClient.invalidateQueries({
         queryKey: CAFE_KEYS.detail(updatedCafe.id),
       });
@@ -68,7 +67,7 @@ export function useCafeDelete() {
   return useMutation({
     mutationFn: cafeApi.deleteCafe,
     onSuccess: (_, deletedId) => {
-      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list(null, null) });
+      queryClient.invalidateQueries({ queryKey: CAFE_KEYS.list() });
       queryClient.invalidateQueries({ queryKey: CAFE_KEYS.detail(deletedId) });
     },
   });

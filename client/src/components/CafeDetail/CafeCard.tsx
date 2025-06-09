@@ -1,13 +1,7 @@
 import { useFavorite } from '@/hooks/useFavorite';
+import type { Cafe } from '@/types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { Link } from 'react-router';
-
-interface Cafe {
-  id: string;
-  name: string;
-  photos: string[];
-  address: string;
-}
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -22,7 +16,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
       <div className="aspect-square w-full relative overflow-hidden rounded-xl">
         <Link to={`/cafes/${cafe.id}`}>
           <img
-            src={cafe.photos[0]}
+            src={cafe.photos[0].url}
             alt={cafe.name}
             loading="lazy"
             className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-300"

@@ -1,15 +1,6 @@
 import type { Cafe } from '@/types';
 import supabase from '@/utils/supabase';
 
-// Supabase 원본 데이터 타입
-// photos: { url: string }[]
-// summaries: { summary_type: string; is_available: boolean }[]
-type CafeDb = Omit<Cafe, 'photos' | 'summaries'> & {
-  photos: { url: string }[];
-  summaries: { summary_type: string; is_available: boolean }[];
-  facilities?: { facility_type: string; is_available: boolean }[];
-};
-
 const fetchCafeList = async ({
   page,
   pageSize,
@@ -18,9 +9,9 @@ const fetchCafeList = async ({
 }: {
   page: number;
   pageSize: number;
-  query: string | null;
-  summary: string | null;
-}): Promise<{ items: Cafe[]; nextPage: number | null }> => {
+  query?: string;
+  summary?: string;
+}): Promise<{ data: Cafe[]; nextPage: number | null }> => {
   const from = page * pageSize;
   const to = from + pageSize - 1;
 
@@ -60,25 +51,10 @@ const fetchCafeList = async ({
 
   if (error) throw error;
 
-  const items = (data as CafeDb[]).map((cafe) => ({
-    ...cafe,
-    photos: cafe.photos.map((photo) => photo.url),
-    summaries: cafe.summaries.reduce((acc, cur) => {
-      acc[cur.summary_type] = cur.is_available;
-      return acc;
-    }, {} as { [key: string]: boolean }),
-    facilities: cafe.facilities
-      ? cafe.facilities.reduce((acc, cur) => {
-          acc[cur.facility_type] = cur.is_available;
-          return acc;
-        }, {} as { [key: string]: boolean })
-      : {},
-  }));
-
   const nextPage = count && from + pageSize < count ? page + 1 : null;
 
   return {
-    items,
+    data,
     nextPage,
   };
 };
@@ -107,21 +83,7 @@ const fetchCafeById = async (id: string): Promise<Cafe> => {
 
   if (error) throw error;
 
-  const cafe = data as CafeDb;
-  return {
-    ...cafe,
-    photos: cafe.photos.map((photo) => photo.url),
-    summaries: cafe.summaries.reduce((acc, cur) => {
-      acc[cur.summary_type] = cur.is_available;
-      return acc;
-    }, {} as { [key: string]: boolean }),
-    facilities: cafe.facilities
-      ? cafe.facilities.reduce((acc, cur) => {
-          acc[cur.facility_type] = cur.is_available;
-          return acc;
-        }, {} as { [key: string]: boolean })
-      : {},
-  };
+  return data;
 };
 
 const createCafe = async (newCafe: Omit<Cafe, 'id'>): Promise<Cafe> => {
@@ -148,21 +110,7 @@ const createCafe = async (newCafe: Omit<Cafe, 'id'>): Promise<Cafe> => {
 
   if (error) throw error;
 
-  const cafe = data as CafeDb;
-  return {
-    ...cafe,
-    photos: cafe.photos.map((photo) => photo.url),
-    summaries: cafe.summaries.reduce((acc, cur) => {
-      acc[cur.summary_type] = cur.is_available;
-      return acc;
-    }, {} as { [key: string]: boolean }),
-    facilities: cafe.facilities
-      ? cafe.facilities.reduce((acc, cur) => {
-          acc[cur.facility_type] = cur.is_available;
-          return acc;
-        }, {} as { [key: string]: boolean })
-      : {},
-  };
+  return data;
 };
 
 const updateCafe = async ({ id, ...cafe }: Cafe): Promise<Cafe> => {
@@ -190,21 +138,7 @@ const updateCafe = async ({ id, ...cafe }: Cafe): Promise<Cafe> => {
 
   if (error) throw error;
 
-  const cafeDb = data as CafeDb;
-  return {
-    ...cafeDb,
-    photos: cafeDb.photos.map((photo) => photo.url),
-    summaries: cafeDb.summaries.reduce((acc, cur) => {
-      acc[cur.summary_type] = cur.is_available;
-      return acc;
-    }, {} as { [key: string]: boolean }),
-    facilities: cafeDb.facilities
-      ? cafeDb.facilities.reduce((acc, cur) => {
-          acc[cur.facility_type] = cur.is_available;
-          return acc;
-        }, {} as { [key: string]: boolean })
-      : {},
-  };
+  return data;
 };
 
 const deleteCafe = async (id: string): Promise<void> => {

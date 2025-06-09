@@ -21,7 +21,7 @@ export default function CafeCard({ cafe }: CafeCardProps) {
       <div className="flex-col cursor-pointer group flex">
         <div className="aspect-square w-full relative overflow-hidden rounded-xl">
           <img
-            src={cafe.photos?.[0]}
+            src={cafe.photos[0].url}
             alt={cafe.name}
             className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
           />

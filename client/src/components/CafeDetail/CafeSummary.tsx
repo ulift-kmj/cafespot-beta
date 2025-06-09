@@ -1,5 +1,5 @@
 interface CafeSummaryProps {
-  summaries: { [key: string]: string | boolean };
+  summaries: { summary_type: string; is_available: boolean }[];
   summaryLabels: { [key: string]: string };
 }
 
@@ -8,14 +8,14 @@ function CafeSummary({ summaries, summaryLabels }: CafeSummaryProps) {
     <div className="border-b-2 border-gray-100 pb-5">
       <h3 className="text-xl font-bold mb-4 text-darkBrown">Summary</h3>
       <div className="flex flex-wrap gap-3">
-        {Object.entries(summaries)
-          .filter(([, value]) => value === true || value === 'true')
-          .map(([key]) => (
+        {summaries
+          .filter((summary) => summary.is_available)
+          .map(({ summary_type }) => (
             <span
-              key={key}
+              key={summary_type}
               className="bg-primary text-white px-3 py-1 rounded-[10px] font-semibold text-sm"
             >
-              {summaryLabels[key] || key}
+              {summaryLabels[summary_type] || summary_type}
             </span>
           ))}
       </div>

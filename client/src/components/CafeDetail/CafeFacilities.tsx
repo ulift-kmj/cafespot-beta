@@ -10,16 +10,15 @@ import {
 } from 'react-icons/fa';
 
 interface Facility {
-  key: string;
-  label: string;
-  icon: React.ElementType;
+  is_available: boolean;
+  facility_type: string;
 }
 
 interface CafeFacilitiesProps {
-  facilities: { [key: string]: string | boolean };
+  facilities: Facility[];
 }
 
-const facilitiesData: Facility[] = [
+const facilitiesData = [
   { key: 'wifi', label: 'WiFi', icon: FaWifi },
   { key: 'parking', label: 'Parking', icon: FaParking },
   { key: 'petFriendly', label: 'Pet-friendly', icon: FaDog },
@@ -31,6 +30,11 @@ const facilitiesData: Facility[] = [
 ];
 
 function CafeFacilities({ facilities }: CafeFacilitiesProps) {
+  const facilityMap = facilities.reduce((acc, facility) => {
+    acc[facility.facility_type] = facility.is_available;
+    return acc;
+  }, {} as Record<string, boolean>);
+
   return (
     <div className="border-b-2 border-gray-100 pb-5">
       <h3 className="text-xl font-bold mb-4 text-darkBrown">Facilities</h3>
@@ -39,9 +43,7 @@ function CafeFacilities({ facilities }: CafeFacilitiesProps) {
           <li
             key={key}
             className={`flex flex-col items-center gap-2 ${
-              facilities[key] === true || facilities[key] === 'true'
-                ? 'text-primary'
-                : 'text-[#E0E0E0]'
+              facilityMap[key] ? 'text-primary' : 'text-[#E0E0E0]'
             }`}
           >
             <Icon size={24} />
