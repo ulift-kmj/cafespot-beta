@@ -1,7 +1,7 @@
 import { useFavorite } from '@/hooks/useFavorite';
 import type { Cafe } from '@/types';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { Link } from 'react-router';
+import FavoriteButton from '@/components/commons/FavoriteButton';
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -29,23 +29,10 @@ export default function CafeCard({ cafe }: CafeCardProps) {
 
         <div className="font-semibold text-[15px] flex items-center justify-between">
           <span>{cafe.name}</span>
-          <button
-            className="p-1"
-            aria-label={favorite ? '찜하기 해제' : '찜하기'}
-            onClick={handleFavorite}
-          >
-            {favorite ? (
-              <AiFillHeart
-                size={24}
-                className="fill-primary transition-transform duration-200 hover:scale-110"
-              />
-            ) : (
-              <AiOutlineHeart
-                size={24}
-                className="fill-neutral-500/70 transition-transform duration-200 hover:scale-110"
-              />
-            )}
-          </button>
+          <FavoriteButton
+            favorite={favorite}
+            onToggleFavorite={handleFavorite}
+          />
         </div>
         <p className="font-light text-neutral-500 text-[14px]">
           {cafe.address}

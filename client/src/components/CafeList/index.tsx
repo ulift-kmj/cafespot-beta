@@ -5,6 +5,7 @@ import { useCafeList } from '@/hooks/useCafe';
 import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
 import type { Cafe } from '@/types';
 import { useEffect, useRef } from 'react';
+import useDebounce from '@/hooks/useDebounce';
 
 interface InfiniteCafeResponse {
   data: Cafe[];
@@ -13,8 +14,10 @@ interface InfiniteCafeResponse {
 
 export default function CafeList() {
   const { searchQuery, selectedSummary } = useSearchFilterStore();
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useCafeList(10, searchQuery, selectedSummary);
+    useCafeList(10, debouncedSearchQuery, selectedSummary);
 
   const observerRef = useRef<IntersectionObserver>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);

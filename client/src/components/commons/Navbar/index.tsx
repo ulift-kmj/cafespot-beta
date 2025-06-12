@@ -11,7 +11,7 @@ import { SearchBar } from './SearchBar';
 
 const Navbar = () => {
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const { searchQuery, selectedSummary, resetFilters } = useSearchFilterStore();
+  const { selectedSummary, resetFilters } = useSearchFilterStore();
 
   return (
     <NavbarContainer>
@@ -25,7 +25,7 @@ const Navbar = () => {
         </Link>
 
         <div className="relative hidden md:flex items-center gap-2 mx-4 flex-1 justify-center">
-          <SearchBar initialQuery={searchQuery} />
+          <SearchBar />
 
           <Popover open={showFilterModal} onOpenChange={setShowFilterModal}>
             <PopoverTrigger asChild>

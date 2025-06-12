@@ -10,8 +10,7 @@ interface CafeHeaderProps {
 }
 
 function CafeHeader({ id, name, address }: CafeHeaderProps) {
-  const { favorites, toggleFavorite } = useFavorite();
-  const isFavorited = favorites.some((favorite) => favorite.id === id);
+  const { toggleFavorite, isFavorite } = useFavorite();
 
   const copyLinkToClipboard = () => {
     const link = `${window.location.origin}/cafes/${id}`;
@@ -36,9 +35,11 @@ function CafeHeader({ id, name, address }: CafeHeaderProps) {
           <button
             onClick={() => toggleFavorite({ id, name, address })}
             className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition"
-            title={isFavorited ? 'Remove from Favorites' : 'Add to Favorites'}
+            title={
+              isFavorite(id) ? 'Remove from Favorites' : 'Add to Favorites'
+            }
           >
-            {isFavorited ? (
+            {isFavorite(id) ? (
               <FaHeart size={22} className="text-darkBrown" />
             ) : (
               <FaRegHeart size={22} className="text-darkBrown" />

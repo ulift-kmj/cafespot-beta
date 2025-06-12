@@ -1,6 +1,5 @@
 import { PopoverContent } from '@/components/ui/popover';
 import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
-import { useState } from 'react';
 
 interface FilterModalProps {
   selectedSummary: string;
@@ -13,17 +12,15 @@ export const FilterModal = ({
   translations,
   onClose,
 }: FilterModalProps) => {
-  const [inputSelectedSummary, setInputSelectedSummary] =
-    useState(selectedSummary);
   const { setSelectedSummary } = useSearchFilterStore();
 
   const handleApply = () => {
-    setSelectedSummary(inputSelectedSummary);
+    setSelectedSummary(selectedSummary);
     onClose();
   };
 
   const handleCancel = () => {
-    setInputSelectedSummary(selectedSummary);
+    setSelectedSummary(selectedSummary);
     onClose();
   };
 
@@ -35,12 +32,10 @@ export const FilterModal = ({
             <button
               key={value}
               onClick={() =>
-                setInputSelectedSummary((prev: string) =>
-                  prev === value ? '' : value
-                )
+                setSelectedSummary(selectedSummary === value ? '' : value)
               }
               className={`px-4 py-2 rounded-full border cursor-pointer ${
-                inputSelectedSummary === value
+                selectedSummary === value
                   ? 'bg-primary text-white border-primary-400'
                   : 'text-[#D1B282] border-[#D1B282]'
               }`}
