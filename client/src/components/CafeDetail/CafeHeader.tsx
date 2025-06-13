@@ -10,7 +10,8 @@ interface CafeHeaderProps {
 }
 
 function CafeHeader({ id, name, address }: CafeHeaderProps) {
-  const { toggleFavorite, isFavorite } = useFavorite();
+  // const { toggleFavorite, isFavorite } = useFavorite();
+  const { isFavorite } = useFavorite();
 
   const copyLinkToClipboard = () => {
     const link = `${window.location.origin}/cafes/${id}`;
