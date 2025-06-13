@@ -33,7 +33,7 @@ function CafeHeader({ id, name, address }: CafeHeaderProps) {
         </AddressLink>
         <div className="flex items-center gap-4">
           <button
-            onClick={() => toggleFavorite({ id, name, address })}
+            // onClick={() => toggleFavorite({ id, name, address })}
             className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition"
             title={
               isFavorite(id) ? 'Remove from Favorites' : 'Add to Favorites'
