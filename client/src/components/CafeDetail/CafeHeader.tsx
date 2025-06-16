@@ -11,8 +11,6 @@ interface CafeHeaderProps {
 function CafeHeader({ cafe }: CafeHeaderProps) {
   const { isFavorite, toggleFavorite } = useFavorite();
 
-  console.log(cafe);
-
   const copyLinkToClipboard = () => {
     const link = `${window.location.origin}/cafes/${cafe.id}`;
     navigator.clipboard
