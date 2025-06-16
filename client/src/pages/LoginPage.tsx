@@ -7,17 +7,21 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { session, login, isLoggingIn, loginError } = useAuth();
+  const { session, login, isLoggingIn, loginError, role } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // 이미 로그인된 경우 메인 페이지로 리다이렉트
+  // 로그인 상태에 따른 리다이렉트
   useEffect(() => {
-    if (session) {
-      navigate('/');
+    if (session && role !== undefined) {
+      if (role === 'admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/');
+      }
     }
-  }, [session, navigate]);
+  }, [session, role, navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     login({ email, password });
   };

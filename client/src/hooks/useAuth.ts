@@ -96,6 +96,7 @@ export const useAuth = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(() => {
       queryClient.invalidateQueries({ queryKey: ['authSession'] });
+      queryClient.invalidateQueries({ queryKey: ['userRole'] });
     });
 
     return () => {
@@ -111,7 +112,7 @@ export const useAuth = () => {
     error: sessionError || roleError,
 
     // 뮤테이션
-    login: loginMutation.mutate,
+    login: loginMutation.mutateAsync,
     logout: logoutMutation.mutate,
     signUp: signUpMutation.mutate,
     isLoggingIn: loginMutation.isPending,

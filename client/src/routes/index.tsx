@@ -1,10 +1,15 @@
 import Layout from '@/components/commons/Layout';
+import ProtectedRoute from '@/hoc/ProtectedRoute';
 import CafeDetailPage from '@/pages/CafeDetailPage';
 import CafeListPage from '@/pages/CafeListPage';
 import LoginPage from '@/pages/LoginPage';
 import SignUpPage from '@/pages/SignUpPage';
 import LogoutPage from '@/pages/LogoutPage';
-import { createBrowserRouter } from 'react-router';
+import AdminDashboardPage from '@/pages/AdminDashboardPage';
+import AdminCafeListPage from '@/pages/AdminCafeListPage';
+import AdminEditCafePage from '@/pages/AdminEditCafePage';
+import AdminNewCafePage from '@/pages/AdminNewCafePage';
+import { createBrowserRouter, Outlet } from 'react-router';
 
 export const router = createBrowserRouter([
   {
@@ -33,25 +38,30 @@ export const router = createBrowserRouter([
     path: '/logout',
     Component: LogoutPage,
   },
-  // {
-  //   path: '/admin',
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       Component: AdminDashboardPage,
-  //     },
-  //     {
-  //       path: 'cafes',
-  //       Component: AdminCafePage,
-  //     },
-  //     {
-  //       path: 'cafes/:id/edit',
-  //       Component: AdminCafeEditPage,
-  //     },
-  //     {
-  //       path: 'cafes/new',
-  //       Component: AdminCafeNewPage,
-  //     },
-  //   ],
-  // },
+  {
+    path: '/admin',
+    element: (
+      <ProtectedRoute requiredRole='admin'>
+        <Outlet />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: 'dashboard',
+        Component: AdminDashboardPage,
+      },
+      {
+        path: 'cafes',
+        Component: AdminCafeListPage,
+      },
+      {
+        path: 'cafes/:id/edit',
+        Component: AdminEditCafePage,
+      },
+      {
+        path: 'cafes/new',
+        Component: AdminNewCafePage,
+      },
+    ],
+  },
 ]);
