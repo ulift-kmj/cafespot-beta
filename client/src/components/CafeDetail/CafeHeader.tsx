@@ -1,20 +1,20 @@
 import AddressLink from '@/components/CafeDetail/AddressLink';
 import { useFavorite } from '@/hooks/useFavorite';
+import type { Cafe } from '@/types/cafe';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { IoCopyOutline } from 'react-icons/io5';
 
 interface CafeHeaderProps {
-  id: string;
-  name: string;
-  address: string;
+  cafe: Cafe;
 }
 
-function CafeHeader({ id, name, address }: CafeHeaderProps) {
-  // const { toggleFavorite, isFavorite } = useFavorite();
-  const { isFavorite } = useFavorite();
+function CafeHeader({ cafe }: CafeHeaderProps) {
+  const { isFavorite, toggleFavorite } = useFavorite();
+
+  console.log(cafe);
 
   const copyLinkToClipboard = () => {
-    const link = `${window.location.origin}/cafes/${id}`;
+    const link = `${window.location.origin}/cafes/${cafe.id}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
@@ -27,20 +27,20 @@ function CafeHeader({ id, name, address }: CafeHeaderProps) {
 
   return (
     <div className="flex flex-col justify-between mt-7">
-      <h2 className="text-3xl font-semibold text-darkBrown">{name}</h2>
+      <h2 className="text-3xl font-semibold text-darkBrown">{cafe.name}</h2>
       <div className="flex justify-between items-center mt-4">
         <AddressLink className="flex items-center text-darkBrown">
-          {address}
+          {cafe.address}
         </AddressLink>
         <div className="flex items-center gap-4">
           <button
-            // onClick={() => toggleFavorite({ id, name, address })}
-            className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition"
+            onClick={() => toggleFavorite(cafe)}
+            className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition cursor-pointer"
             title={
-              isFavorite(id) ? 'Remove from Favorites' : 'Add to Favorites'
+              isFavorite(cafe.id) ? 'Remove from Favorites' : 'Add to Favorites'
             }
           >
-            {isFavorite(id) ? (
+            {isFavorite(cafe.id) ? (
               <FaHeart size={22} className="text-darkBrown" />
             ) : (
               <FaRegHeart size={22} className="text-darkBrown" />
@@ -48,7 +48,7 @@ function CafeHeader({ id, name, address }: CafeHeaderProps) {
           </button>
           <button
             onClick={copyLinkToClipboard}
-            className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition"
+            className="flex items-center gap-1 text-darkBrown hover:text-darkBrown transition cursor-pointer"
             title="Copy Link"
           >
             <IoCopyOutline size={24} />

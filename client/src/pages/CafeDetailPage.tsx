@@ -19,7 +19,7 @@ function CafeDetailPage() {
     <Container>
       <div className="max-w-screen-xl mx-auto text-secondary">
         <div className="flex flex-col gap-6">
-          <CafeHeader id={cafe.id} name={cafe.name} address={cafe.address} />
+          <CafeHeader cafe={cafe} />
           <CafeImageCarousel photos={cafe.photos} />
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 mt-6">
             <div className="flex flex-col gap-4">
