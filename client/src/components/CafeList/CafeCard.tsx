@@ -23,6 +23,7 @@ export default function CafeCard({ cafe }: CafeCardProps) {
           <img
             src={cafe.photos[0].url}
             alt={cafe.name}
+            loading="lazy"
             className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
           />
         </div>
