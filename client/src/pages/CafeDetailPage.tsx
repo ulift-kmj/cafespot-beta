@@ -5,7 +5,6 @@ import CafeLocation from '@/components/CafeDetail/CafeLocation';
 import CafeSummary from '@/components/CafeDetail/CafeSummary';
 import CafeImageCarousel from '@/components/CafeDetail/CafeImageCarousel';
 import Container from '@/components/commons/Container';
-import { summaryLabels } from '@/constants';
 import { useCafeDetail } from '@/hooks/useCafe';
 import { useParams } from 'react-router';
 
@@ -23,10 +22,7 @@ function CafeDetailPage() {
           <CafeImageCarousel photos={cafe.photos} />
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 mt-6">
             <div className="flex flex-col gap-4">
-              <CafeSummary
-                summaries={cafe.summaries}
-                summaryLabels={summaryLabels}
-              />
+              <CafeSummary summaries={cafe.summaries} />
               <CafeDescription description={cafe.description} />
               <CafeFacilities facilities={cafe.facilities} />
             </div>

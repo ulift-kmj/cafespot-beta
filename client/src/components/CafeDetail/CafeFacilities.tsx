@@ -1,39 +1,20 @@
-import {
-  FaApple,
-  FaDog,
-  FaParking,
-  FaRestroom,
-  FaShoppingBag,
-  FaTruck,
-  FaUsers,
-  FaWifi,
-} from 'react-icons/fa';
+import { facilitiesData } from '@/constants/facility';
+import type { FacilityType } from '@/types';
 
 interface Facility {
   is_available: boolean;
-  facility_type: string;
+  facility_type: FacilityType;
 }
 
 interface CafeFacilitiesProps {
   facilities: Facility[];
 }
 
-const facilitiesData = [
-  { key: 'wifi', label: 'WiFi', icon: FaWifi },
-  { key: 'parking', label: 'Parking', icon: FaParking },
-  { key: 'petFriendly', label: 'Pet-friendly', icon: FaDog },
-  { key: 'bathroom', label: 'Bathroom', icon: FaRestroom },
-  { key: 'toGo', label: 'To Go', icon: FaShoppingBag },
-  { key: 'delivery', label: 'Delivery', icon: FaTruck },
-  { key: 'groupAvailable', label: 'Groups', icon: FaUsers },
-  { key: 'applePay', label: 'Apple Pay', icon: FaApple },
-];
-
 function CafeFacilities({ facilities }: CafeFacilitiesProps) {
   const facilityMap = facilities.reduce((acc, facility) => {
     acc[facility.facility_type] = facility.is_available;
     return acc;
-  }, {} as Record<string, boolean>);
+  }, {} as Record<FacilityType, boolean>);
 
   return (
     <div className="border-b-2 border-gray-100 pb-5">
@@ -43,19 +24,13 @@ function CafeFacilities({ facilities }: CafeFacilitiesProps) {
           <li
             key={key}
             className={`flex flex-col items-center gap-2 ${
-              facilityMap[key] ? 'text-primary' : 'text-[#E0E0E0]'
+              facilityMap[key as FacilityType]
+                ? 'text-primary'
+                : 'text-gray-300'
             }`}
           >
             <Icon size={24} />
-            <span
-              className={`text-gray-800 ${
-                key === 'petFriendly' || key === 'applePay'
-                  ? 'whitespace-nowrap'
-                  : ''
-              }`}
-            >
-              {label}
-            </span>
+            <span className="text-gray-800 whitespace-nowrap">{label}</span>
           </li>
         ))}
       </ul>

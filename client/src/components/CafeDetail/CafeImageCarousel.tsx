@@ -6,11 +6,11 @@ import {
   Carousel,
 } from '@/components/ui/carousel';
 
-interface CarouselProps {
+interface CafeImageCarouselProps {
   photos: { url: string }[];
 }
 
-const CafeImageCarousel = ({ photos }: CarouselProps) => {
+const CafeImageCarousel = ({ photos }: CafeImageCarouselProps) => {
   return (
     <Carousel className="w-full h-[50vh] rounded-xl overflow-hidden">
       <CarouselContent>

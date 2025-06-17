@@ -1,9 +1,11 @@
+import { summaryLabels } from '@/constants';
+import type { SummaryType } from '@/types/cafe';
+
 interface CafeSummaryProps {
-  summaries: { summary_type: string; is_available: boolean }[];
-  summaryLabels: { [key: string]: string };
+  summaries: { summary_type: SummaryType; is_available: boolean }[];
 }
 
-function CafeSummary({ summaries, summaryLabels }: CafeSummaryProps) {
+function CafeSummary({ summaries }: CafeSummaryProps) {
   return (
     <div className="border-b-2 border-gray-100 pb-5">
       <h3 className="text-xl font-bold mb-4 text-darkBrown">Summary</h3>
@@ -15,7 +17,7 @@ function CafeSummary({ summaries, summaryLabels }: CafeSummaryProps) {
               key={summary_type}
               className="bg-primary text-white px-3 py-1 rounded-[10px] font-semibold text-sm"
             >
-              {summaryLabels[summary_type] || summary_type}
+              {summaryLabels[summary_type as SummaryType]}
             </span>
           ))}
       </div>
