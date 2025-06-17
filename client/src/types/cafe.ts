@@ -27,3 +27,8 @@ export type Cafe = {
   facilities: { facility_type: FacilityType; is_available: boolean }[];
   summaries: { summary_type: SummaryType; is_available: boolean }[];
 };
+
+export type CafeResponse = {
+  data: Cafe[];
+  nextPage: number | null;
+};
