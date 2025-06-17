@@ -1,11 +1,11 @@
 import NavbarContainer from '@/components/commons/Navbar/NavbarContainer';
+import { FavoriteSidebar } from '@/components/commons/FavoriteSidebar';
 import { Popover, PopoverTrigger } from '@/components/ui/popover';
 import { summaryTranslations } from '@/constants/filter';
 import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
 import { useState } from 'react';
 import { PiSlidersHorizontal } from 'react-icons/pi';
 import { Link } from 'react-router';
-import { FavoriteSidebar } from './FavoriteSidebar';
 import { FilterModal } from './FilterModal';
 import { SearchBar } from './SearchBar';
 
