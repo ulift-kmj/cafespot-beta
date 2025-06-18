@@ -1,8 +1,8 @@
 import AddressLink from '@/components/CafeDetail/AddressLink';
+import FavoriteButton from '@/components/commons/FavoriteButton';
 import { useFavorite } from '@/hooks/useFavorite';
 import type { Cafe } from '@/types/cafe';
 import { IoCopyOutline } from 'react-icons/io5';
-import FavoriteButton from '@/components/commons/FavoriteButton';
 
 interface CafeHeaderProps {
   cafe: Cafe;
@@ -12,7 +12,7 @@ function CafeHeader({ cafe }: CafeHeaderProps) {
   const { isFavorite, toggleFavorite } = useFavorite();
 
   const copyLinkToClipboard = () => {
-    const link = `${window.location.origin}/cafes/${cafe.id}`;
+    const link = `${window.location.origin}/cafe/${cafe.id}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
