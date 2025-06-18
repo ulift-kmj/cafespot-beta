@@ -14,16 +14,6 @@ export const FilterModal = ({
 }: FilterModalProps) => {
   const { setSelectedSummary } = useSearchFilterStore();
 
-  const handleApply = () => {
-    setSelectedSummary(selectedSummary);
-    onClose();
-  };
-
-  const handleCancel = () => {
-    setSelectedSummary(selectedSummary);
-    onClose();
-  };
-
   return (
     <PopoverContent className="w-auto p-4" align="center">
       <div className="mb-4">
@@ -45,18 +35,12 @@ export const FilterModal = ({
           ))}
         </div>
       </div>
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end">
         <button
-          onClick={handleCancel}
+          onClick={onClose}
           className="px-4 py-2 text-gray-600 hover:text-gray-800 cursor-pointer"
         >
-          취소
-        </button>
-        <button
-          onClick={handleApply}
-          className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-500 cursor-pointer"
-        >
-          적용하기
+          닫기
         </button>
       </div>
     </PopoverContent>
