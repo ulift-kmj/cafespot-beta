@@ -39,8 +39,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-warning: #f5dab3;
-  --color-darkBrown: #58473b;
+  --color-warning: var(--warning);
+  --color-darkBrown: var(--darkBrown);
 
   --shadow-custom: 0 4px 60px rgba(4, 6, 15, 0.05);
 }
@@ -57,6 +57,8 @@
   --primary-foreground: #f5dab3;
   --secondary: #f5dab3;
   --secondary-foreground: #b37e2e;
+  --warning: #f5dab3;
+  --darkBrown: #58473b;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
