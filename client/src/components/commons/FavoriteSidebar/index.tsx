@@ -1,9 +1,9 @@
+import FavoriteCafeList from '@/components/commons/FavoriteSidebar/FavoriteCafeList';
+import SidebarToggleButton from '@/components/commons/Navbar/SidebarToggleButton';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { useFavorite } from '@/hooks/useFavorite';
 import { useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import SidebarToggleButton from '@/components/commons/Navbar/SidebarToggleButton';
-import FavoriteCafeList from './FavoriteCafeList';
 
 export const FavoriteSidebar = () => {
   const { favorites, toggleFavorite, isFavorite } = useFavorite();

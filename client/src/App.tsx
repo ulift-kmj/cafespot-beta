@@ -1,6 +1,6 @@
+import '@/App.css';
 import { FavoriteProvider } from '@/contexts/FavoriteProvider';
 import { Outlet } from 'react-router';
-import './App.css';
 
 function App() {
   return (

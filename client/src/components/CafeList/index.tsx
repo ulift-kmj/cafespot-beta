@@ -1,13 +1,13 @@
 import CafeCard from '@/components/CafeList/CafeCard';
+import CafeGrid from '@/components/CafeList/CafeGrid';
+import EmptyState from '@/components/CafeList/EmptyState';
 import LoadingMore from '@/components/CafeList/LoadingMore';
 import ErrorMessage from '@/components/commons/ErrorMessage';
 import { useCafeList } from '@/hooks/useCafe';
-import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
 import useDebounce from '@/hooks/useDebounce';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
 import type { CafeResponse } from '@/types';
-import EmptyState from './EmptyState';
-import CafeGrid from './CafeGrid';
 
 export default function CafeList() {
   const { searchQuery, selectedSummary } = useSearchFilterStore();

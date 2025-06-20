@@ -1,7 +1,7 @@
-import type { Cafe } from '@/types/cafe';
+import { FavoriteContext } from '@/contexts/FavoriteContext';
+import type { Cafe } from '@/types';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { FavoriteContext } from './FavoriteContext';
 
 export function FavoriteProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Cafe[]>(() => {
