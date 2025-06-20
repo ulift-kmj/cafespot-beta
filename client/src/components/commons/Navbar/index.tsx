@@ -1,5 +1,5 @@
-import NavbarContainer from '@/components/commons/Navbar/NavbarContainer';
 import { FavoriteSidebar } from '@/components/commons/FavoriteSidebar';
+import NavbarContainer from '@/components/commons/Navbar/NavbarContainer';
 import { Popover, PopoverTrigger } from '@/components/ui/popover';
 import { summaryTranslations } from '@/constants/filter';
 import { useSearchFilterStore } from '@/stores/useSearchFilterStore';
@@ -29,7 +29,7 @@ const Navbar = () => {
 
           <Popover open={showFilterModal} onOpenChange={setShowFilterModal}>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 px-4 py-2 border border-primary text-primary rounded-full cursor-pointer">
+              <button className="flex items-center gap-1 px-4 py-2 border border-primary text-primary rounded-full cursor-pointer whitespace-nowrap">
                 {selectedSummary
                   ? summaryTranslations[
                       selectedSummary as keyof typeof summaryTranslations
